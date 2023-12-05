@@ -6,11 +6,12 @@ let sum = 0
 const isSymbol = (char) => {
   if (!isNaN(char)) return false
   if (char === '.') return false
+  if (char === undefined) return false
   return true
 }
 
 let lineNum = 0
-console.log('line', lineNum)
+// console.log('line', lineNum)
 while (lineNum < lines.length) {
   let n = ''
   let start = -1
@@ -18,8 +19,8 @@ while (lineNum < lines.length) {
   let ln = lines[lineNum]
   // if (!lineNum) console.log(ln)
   // if (lineNum) return
-  for (let i = 0 ; i < ln.length; i++) {
-    const char = ln[i]
+  for (let i = 0 ; i < ln.length + 1; i++) {
+    const char = ln[i] || '.'
     // console.log(char)
     if (!isNaN(char)) {
       // console.log(char, 'is a number')
@@ -39,10 +40,10 @@ while (lineNum < lines.length) {
           if (lineNum - 1 >= 0) toCheck.push(lines[lineNum - 1][j])
           if (lineNum + 1 < lines.length) toCheck.push(lines[lineNum + 1][j])
         }
-        console.log('line', lineNum, 'n', n, toCheck)
+        // console.log('line', lineNum, 'n', n, toCheck)
         let not_found = toCheck.every((el) => !isSymbol(el))
         if (!not_found) {
-          console.log('line', lineNum, Number(n))
+          // console.log('found symbol for line', lineNum, 'n', Number(n))
           sum += Number(n)
         }
       }
