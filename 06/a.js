@@ -1,8 +1,11 @@
-const input = require('./input')
+const fs = require('fs')
+const input = fs.readFileSync(__dirname + '/input.txt', 'utf8')
+
 const [ time, distance ] = input
   .split('\n')
   .filter(ln => ln.length)
   .map(ln => ln
+    .trim()
     .split(/\s+/)
     .map(str => isNaN(Number(str)) ? str : Number(str))
   )
